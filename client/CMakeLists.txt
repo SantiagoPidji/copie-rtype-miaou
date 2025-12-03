@@ -1,5 +1,6 @@
 project(r-type_client LANGUAGES CXX)
 
+
 # ------------------------------
 # SOURCE & INCLUDE PATHS
 # ------------------------------
