@@ -1,0 +1,36 @@
+/*
+** EPITECH PROJECT, 2025
+** real_r_type
+** File description:
+** SFMLTextureManager
+*/
+
+#include "SFMLTextureManager.hpp"
+
+using namespace Graphics;
+
+bool SFMLTextureManager::loadTexture(const std::string &filePath)
+{
+    if (_textures.contains(filePath)) {
+        return true;
+    }
+
+    sf::Texture texture;
+    if (!texture.loadFromFile(filePath)) {
+        return false;
+    }
+
+    _textures.emplace(filePath, std::move(texture));
+    return true;
+}
+
+std::unique_ptr<ISprite> SFMLTextureManager::createSprite(const std::string &texturePath)
+{
+    if (!loadTexture(texturePath)) {
+        return nullptr;
+    }
+
+    sf::Sprite sprite(_textures.at(texturePath));
+
+    return std::make_unique<SFMLSprite>(std::move(sprite));
+}
