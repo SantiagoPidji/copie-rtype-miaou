@@ -162,7 +162,7 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: r-type_server-${{ runner.os }}
-          path: build/server/r-type_server
+          path: r-type_server
           if-no-files-found: ignore
 
   # -----------------------------
@@ -220,7 +220,7 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: r-type_client-${{ runner.os }}
-          path: build/client/r-type_client
+          path: r-type_client
           if-no-files-found: ignore
 
   # -----------------------------
