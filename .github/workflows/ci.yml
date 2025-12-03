@@ -162,7 +162,7 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: r-type_server-${{ runner.os }}
-          path: r-type_server
+          path: build/server/r-type_server
           if-no-files-found: ignore
 
   # -----------------------------
@@ -220,7 +220,7 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: r-type_client-${{ runner.os }}
-          path: r-type_client
+          path: build/client/r-type_client
           if-no-files-found: ignore
 
   # -----------------------------
@@ -279,22 +279,15 @@ jobs:
       - name: Check downloaded artifacts
         run: |
           echo "Checking downloaded artifacts..."
-          ls -la ./artifacts/
-          if [ ! -f "./artifacts/r-type_server" ]; then
-            echo "::warning::Server binary not found, skipping upload"
-            exit 0
-          fi
-          if [ ! -f "./artifacts/r-type_client" ]; then
-            echo "::warning::Client binary not found, skipping upload"
-            exit 0
-          fi
+          ls -la ./artifacts/ || true
+          find ./artifacts/ -type f || true
 
       - name: Upload binaries to release
         uses: softprops/action-gh-release@v1
         with:
           files: |
-            ./artifacts/r-type_server
-            ./artifacts/r-type_client
+            ./artifacts/*/r-type_server
+            ./artifacts/*/r-type_client
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
