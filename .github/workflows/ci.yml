@@ -286,8 +286,8 @@ jobs:
         uses: softprops/action-gh-release@v1
         with:
           files: |
-            ./artifacts/*/r-type_server
-            ./artifacts/*/r-type_client
+            ./artifacts/r-type_server
+            ./artifacts/r-type_client
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
